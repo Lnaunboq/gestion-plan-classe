@@ -1,22 +1,19 @@
 Disposion de la salle :
 La rangée numéro 1 possède 4 tables.
-
 La rangée numéro 2 possède 4 tables.
-
 La rangée numéro 3 possède 4 tables.
-
 La rangée numéro 4 possède 3 tables.
 
 Liste des élèves :
 BOITEAU_Antoine
-
 Thibault
-
 GRASSI_Marion
-
 TANI_Matteo
-Liste des contraintes :nullThibault doit être loin de
-GRASSI Marion doit être au fond
+
+Liste des contraintes :
+Antoine doit être devant
+Thibault doit être loin de Matteo
+Marion doit être au fond
 
 ---fin de l'interprétation---
 

@@ -77,14 +77,14 @@ blocDisposition returns [ String code ]
 regleAmenagement returns [ String code ]
     : 'Rangee' num=ENTIER nbr=ENTIER
       {
-        $code = "La rangée numéro " + $num.text + " possède " + $nbr.text + " tables.\n";
+        $code = "La rangée numéro " + $num.text + " possède " + $nbr.text + " tables.";
         //Méthode pour déclarer à la classe une nouvelle rangée;
       }
     ;
 
 
 blocEleves returns [ String code ]
-    : {$code = "Liste des élèves :\n";} //on déclare une string vide sur laquelle on va concaténer les noms des élèves
+    : {$code = "\nListe des élèves :\n";} //on déclare une string vide sur laquelle on va concaténer les noms des élèves
       '{' finInstruction? (eleve {$code += $eleve.code  + "\n";} finInstruction)* finInstruction? '}'
     ;
 
@@ -101,13 +101,13 @@ eleve returns [ String code ]
     ;
 
 blocContraintes returns [ String code ]
-    : {$code = "Liste des contraintes :";} //on déclare une string vide sur laquelle on va concaténer les noms des élèves
+    : {$code = "\nListe des contraintes :\n";} //on déclare une string vide sur laquelle on va concaténer les noms des élèves
       '{' finInstruction? (contraintes {$code += $contraintes.code;} finInstruction)* finInstruction? '}'
     ;
 
 contraintes returns [ String code ]
     : {$code = "";}
-      (NOM {$code += $NOM.text + " ";})? PRENOM CONTRAINTES
+      /*(NOM {$code += $NOM.text + " ";})?*/NOM PRENOM CONTRAINTES
       {
         $code += $PRENOM.text + " doit être " + $CONTRAINTES.text + "\n";
         //méthode pour passer la contrainte au code Java;
@@ -137,6 +137,8 @@ finInstruction : ( NEWLINE | ';' )+ ;
 
 // lexer   /*attention Ã  l'ordre de dÃ©claration !!!*/
 
+CONTRAINTES : ('devant' | 'au fond' | 'loin de' | 'près de') ;
+
 fragment LOWERCASE  : [a-z] ;
 fragment UPPERCASE  : [A-Z] ;
 
@@ -145,9 +147,7 @@ NOM : (UPPERCASE | '-')+ ; //un nom de famille tout en majuscule
 PRENOM : UPPERCASE? (LOWERCASE | '-')+ ; //un prénom avec ou sans majuscule au début
 
 //NOM_PRENOM : ('A'..'Z' | 'a'..'z' | '_' | '-')+ ; //un nom et prénom attachés et reliés par des "_"
-NOM_PRENOM : (UPPERCASE | '-')+ '_' UPPERCASE? (LOWERCASE | '-')+ ; //un nom et prénom attachés et reliés par des "_"
-
-CONTRAINTES : ('devant' | 'au fond' | 'loin de' | 'près de') ;
+NOM_PRENOM : NOM '_' PRENOM ; //un nom et prénom attachés et reliés par des "_"
 
 NEWLINE : '\r'? '\n';
 

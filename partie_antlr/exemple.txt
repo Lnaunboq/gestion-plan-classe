@@ -14,7 +14,7 @@ TANI_Matteo
 
 CONTRAINTES {
 BOITEAU Antoine devant
-Thibault loin de TANI_Matteo
+Thibault loin de Matteo
 GRASSI Marion au fond
 }
 
