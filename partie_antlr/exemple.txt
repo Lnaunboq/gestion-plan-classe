@@ -1,0 +1,20 @@
+DISPOSITION {
+Rangee 1 4
+Rangee 2 4
+Rangee 3 4
+Rangee 4 3
+}
+
+CLASSE {
+BOITEAU Antoine
+Thibault
+GRASSI Marion
+TANI_Matteo
+}
+
+CONTRAINTES {
+BOITEAU Antoine devant
+Thibault loin de TANI_Matteo
+GRASSI Marion au fond
+}
+
