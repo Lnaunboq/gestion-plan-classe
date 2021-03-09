@@ -7,9 +7,10 @@ Compiler la grammaire :
 	- java org.antlr.v4.Tool Parser.g4
 	- javac *.java
 
-arbre antler :
+arbre antlr :
 
 	- java org.antlr.v4.runtime.misc.TestRig Parser start -gui
+	- antlr4-grun Parser 'parsing' > test.mvap
 
 
 Commandes Git :
