@@ -2,19 +2,23 @@ grammar Parser;
 
 @parser::members {
 
-    /*
-    private String fonctionEval (String op) {
-        if ( op.equals("*") ){
-            return "MUL\n";
-        } else if ( op.equals("/") ){
-            return "DIV\n";
+
+    private String fonctionEval (String constraint) {
+        if ( constraint.equals("D") ){
+            return " devant ";
+        } else if ( constraint.equals("F") ){
+            return " au fond.\n";
+        } else if ( constraint.equals("L") ){
+            return " loin de ";
+        } else if ( constraint.equals("P") ){
+                return " près de ";
         } else {
-           System.err.println("OpÃ©rateur arithmÃ©tique incorrect : '"+op+"'");
-           throw new IllegalArgumentException("OpÃ©rateur arithmÃ©tique incorrect : '"+op+"'");
+           System.err.println("Contraine incorrecte : '"+constraint+"'");
+           throw new IllegalArgumentException("OpÃ©rateur arithmÃ©tique incorrect : '"+constraint+"'");
         }
     }
 
-    */
+
 
     /*
     private TablesSymboles tablesSymboles = new TablesSymboles();
@@ -89,13 +93,8 @@ blocEleves returns [ String code ]
     ;
 
 eleve returns [ String code ]
-    : {$code = "";}
-      (NOM {$code += $NOM.text + "_";})? PRENOM //il peut ne pas y avoir de nom de famille
-      {$code += $PRENOM.text;
-      //tableEleves.putVar($code);
-      }//on ajoute l'élève dans les noms déclarés en se basant sur la string contenue dans $code
-    | NOM_PRENOM
-      {$code = $NOM_PRENOM.text;
+    : IDENTIFIANT
+      {$code = $IDENTIFIANT.text;
       //tableEleves.putVar($code);
       }//on ajoute l'élève dans les noms déclarés en se basant sur la string contenue dans $code
     ;
@@ -106,29 +105,14 @@ blocContraintes returns [ String code ]
     ;
 
 contraintes returns [ String code ]
-    : {$code = "";}
-      /*(NOM {$code += $NOM.text + " ";})?*/NOM PRENOM CONTRAINTES
+    : IDENTIFIANT CONTRAINTES
       {
-        $code += $PRENOM.text + " doit être " + $CONTRAINTES.text + "\n";
+        $code = $IDENTIFIANT.text + fonctionEval($CONTRAINTES.text) + "\n";
         //méthode pour passer la contrainte au code Java;
       }
-    | NOM_PRENOM CONTRAINTES
+    | eleve1=IDENTIFIANT CONTRAINTES eleve2=IDENTIFIANT
       {
-        $code = $NOM_PRENOM.text + " doit être " + $CONTRAINTES.text + "\n";
-        //méthode pour passer la contrainte au code Java;
-      }
-    | {$code = "";}
-      (nom1=NOM {$code += $nom1.text + " ";})? prenom1=PRENOM CONTRAINTES
-      {
-        $code += $prenom1.text + " doit être " + $CONTRAINTES.text + " ";
-      }
-      (nom2=NOM {$code += $nom2.text + " ";})? prenom2=PRENOM
-      {
-        $code += $prenom2.text + "\n";
-      }
-    | eleve1=NOM_PRENOM CONTRAINTES eleve2=NOM_PRENOM
-      {
-        $code = $eleve1.text + " doit être " + $CONTRAINTES.text + " " + $eleve2.text + "\n";
+        $code = $eleve1.text + fonctionEval($CONTRAINTES.text) + $eleve2.text + "\n";
         //méthode pour passer la contrainte au code Java;
       }
     ;
@@ -137,17 +121,12 @@ finInstruction : ( NEWLINE | ';' )+ ;
 
 // lexer   /*attention Ã  l'ordre de dÃ©claration !!!*/
 
-CONTRAINTES : ('devant' | 'au fond' | 'loin de' | 'près de') ;
+CONTRAINTES : ('D' | 'F' | 'L' | 'P'); //D = devant ; F = au fond ; L = loin de ; P = près de
 
 fragment LOWERCASE  : [a-z] ;
 fragment UPPERCASE  : [A-Z] ;
 
-NOM : (UPPERCASE | '-')+ ; //un nom de famille tout en majuscule
-
-PRENOM : UPPERCASE? (LOWERCASE | '-')+ ; //un prénom avec ou sans majuscule au début
-
-//NOM_PRENOM : ('A'..'Z' | 'a'..'z' | '_' | '-')+ ; //un nom et prénom attachés et reliés par des "_"
-NOM_PRENOM : NOM '_' PRENOM ; //un nom et prénom attachés et reliés par des "_"
+IDENTIFIANT : (UPPERCASE | '-' | LOWERCASE)+ ; //un nom de famille tout en majuscule
 
 NEWLINE : '\r'? '\n';
 
