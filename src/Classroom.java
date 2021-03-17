@@ -2,12 +2,12 @@ package src;
 
 import java.util.*;
 
-public class Class {
+public class Classroom {
 
 	private List<Student> students;
 	private Student[][] classPlan;
 	
-	public Class(int lines) {
+	public Classroom(int lines) {
 		this.students = new LinkedList<Student>();
 		this.classPlan = new Student[lines][];
 	}
@@ -18,16 +18,16 @@ public class Class {
 		this.classPlan[line-1] = new Student[places];
 	}
 	
-	public Student getStudent(String surname, String firstname) {
+	public Student getStudent(String identifiant) {
 		for(Student s : this.students) {
-			if(s.getFirstname().equals(firstname) && s.getName().equals(surname))
+			if(s.getIdentifiant().equals(identifiant))
 				return s;
 		}
 		return null;
 	}
 	
-	public void addStudent(String surname, String firstname) {
-		this.students.add(new Student(surname, firstname));
+	public void addStudent(String identifiant) {
+		this.students.add(new Student(identifiant));
 	}
 	
 	public void setStudentPosition(Student s, int line, int place) {

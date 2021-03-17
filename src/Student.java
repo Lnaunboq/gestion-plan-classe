@@ -2,14 +2,12 @@ package src;
 
 public class Student {
 
-	private String surname;
-	private String firstname;
+	private String identifiant;
 	private boolean rightHanded;
 	private boolean girl;
 	
-	public Student(String surname, String firstname) {
-		this.surname = surname;
-		this.firstname = firstname;
+	public Student(String identifiant) {
+		this.identifiant = identifiant;
 	}
 
 	public boolean isRightHanded() {
@@ -28,20 +26,19 @@ public class Student {
 		this.girl = girl;
 	}
 
-	public String getName() {
-		return surname;
+	public String getIdentifiant() {
+		return identifiant;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public void setIdentifiant(String identifiant) {
+		this.identifiant = identifiant;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
+		result = prime * result + ((identifiant == null) ? 0 : identifiant.hashCode());
 		return result;
 	}
 
@@ -54,16 +51,12 @@ public class Student {
 		if (getClass() != obj.getClass())
 			return false;
 		Student other = (Student) obj;
-		if (firstname == null) {
-			if (other.firstname != null)
+		if (identifiant == null) {
+			if (other.identifiant != null)
 				return false;
-		} else if (!firstname.equals(other.firstname))
-			return false;
-		if (surname == null) {
-			if (other.surname != null)
-				return false;
-		} else if (!surname.equals(other.surname))
+		} else if (!identifiant.equals(other.identifiant))
 			return false;
 		return true;
 	}
+
 }

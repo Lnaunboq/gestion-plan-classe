@@ -12,11 +12,9 @@ public class LineConstraint implements Constraint {
 
 	@Override
 	public boolean isSatisfiedBy(Student[][] instance) {
-		for(int i = 0; i < instance.length; i++) {
-			for(int j = 0; j < instance[i].length; j++) {
-				if(instance[i][j].equals(this.student) && i == this.rank)
-					return true;
-			}
+		for(int j = 0; j < instance[this.rank].length; j++) {
+			if(instance[this.rank][j].equals(this.student))
+				return true;
 		}
 		return false;
 	}
