@@ -3,12 +3,12 @@ grammar Parser;
 @parser::members {
 
     private String fonctionEvalContrainteSimple (String eleve, String constraint, ConstraintBuilder constraintBuilder, Classroom classe) { //évalue la contrainte donnée par son abbréviation
-      if (classe.getStudent($eleve.text) != null){ //si l'élève existe dans la classe
+      if (classe.getStudent(eleve) != null){ //si l'élève existe dans la classe
         if ( constraint.equals("D") ){
-            constraintBuilder.build("au rang", classe.getStudent($eleve.text), 1); //on positionne la contrainte sur l'eleve au premier rang
+            constraintBuilder.build("au rang", classe.getStudent(eleve), 1); //on positionne la contrainte sur l'eleve au premier rang
             return eleve + "va devant ";
         } else if ( constraint.equals("F") ){
-            constraintBuilder.build("au rang", classe.getStudent($eleve.text), classe.getRowNumber()-1); //on positionne la contrainte sur l'eleve au dernier rang
+            constraintBuilder.build("au rang", classe.getStudent(eleve), classe.getRowNumber()-1); //on positionne la contrainte sur l'eleve au dernier rang
             return eleve + "va au fond.";
         } else if ( constraint.equals("L") ){
             return " loin de ";
@@ -25,12 +25,12 @@ grammar Parser;
     }
 
     private String fonctionEvalContrainteDouble (String eleve1, String eleve2, String constraint, ConstraintBuilder constraintBuilder, Classroom classe) {
-      if (classe.getStudent($eleve1.text) != null && $eleve2.text !=null){ //si les élèves existent dans la classe
+      if (classe.getStudent(eleve1) != null && eleve2 !=null){ //si les élèves existent dans la classe
         if ( constraint.equals("L") ){
-            constraintBuilder.build("loin de", classe.getStudent($eleve1.text), classe.getStudent($eleve2.text));
+            constraintBuilder.build("loin de", classe.getStudent(eleve1), classe.getStudent(eleve2));
             return eleve1 + " loin de " + eleve2;
         } else if ( constraint.equals("P") ){
-            constraintBuilder.build("a cote de", classe.getStudent($eleve1.text), classe.getStudent($eleve2.text));
+            constraintBuilder.build("a cote de", classe.getStudent(eleve1), classe.getStudent(eleve2));
             return eleve1 + " près de " + eleve2;
         } else {
            System.err.println("Contraine incorrecte : '"+constraint+"'");
@@ -38,7 +38,7 @@ grammar Parser;
         }
       }
       else {
-        return "L élève " + eleve1 " ou " + eleve2 + "n a pas été trouvé dans la classe.";
+        return "L élève " + eleve1 + " ou " + eleve2 + "n a pas été trouvé dans la classe.";
       }
     }
 
