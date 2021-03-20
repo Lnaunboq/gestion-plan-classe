@@ -8,8 +8,8 @@ CLASSPATH=.:/usr/share/java/stringtemplate4.jar:/usr/share/java/antlr4.jar:/usr/
 antlr4 Parser.g4
 javac -cp $CLASSPATH *.java
 
-antlr4-grun Parser 'parsing' > test.mvap
+antlr4-grun Parser 'parsing' > resultat_parsing.txt
 
-#java -cp "/usr/share/java/*:MVaP.jar" MVaPAssembler test.mvap
+cat resultat_parsing.txt
 
-#java -jar MVaP.jar -d test.mvap.cbap
+

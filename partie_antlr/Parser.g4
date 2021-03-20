@@ -6,10 +6,10 @@ grammar Parser;
       if (classe.getStudent(eleve) != null){ //si l'élève existe dans la classe
         if ( constraint.equals("D") ){
             constraintBuilder.build("au rang", classe.getStudent(eleve), 1); //on positionne la contrainte sur l'eleve au premier rang
-            return eleve + "va devant ";
+            return eleve + " va devant ";
         } else if ( constraint.equals("F") ){
             constraintBuilder.build("au rang", classe.getStudent(eleve), classe.getRowNumber()-1); //on positionne la contrainte sur l'eleve au dernier rang
-            return eleve + "va au fond.";
+            return eleve + " va au fond.";
         } else if ( constraint.equals("L") ){
             return " loin de ";
         } else if ( constraint.equals("P") ){
@@ -20,7 +20,7 @@ grammar Parser;
         }
       }
       else {
-        return "L élève " + eleve + "n a pas été trouvé dans la classe.";
+        return "L\'élève \"" + eleve + "\" n\'a pas été trouvé dans la classe.";
       }
     }
 
@@ -93,9 +93,9 @@ blocDisposition returns [ String code ]
     ;
 
 regleAmenagement returns [ String code ]
-    : ENTIER 'rangées'
+    : ENTIER 'rangees'
       {
-        $code = "LA class contient " + $ENTIER.text + " rangées.";
+        $code = "La classe contient " + $ENTIER.text + " rangées.";
         classe = new Classroom(Integer.parseInt($ENTIER.text)); //on transforme l'objet ENTIER en type int puis on le passe à Classroom qui a besoin de connaître son nombre de rangée pour être instanciée
       }
     |'Rangee' num=ENTIER nbr=ENTIER
@@ -122,7 +122,9 @@ eleve returns [ String code ]
 blocContraintes returns [ String code ]
     : {$code = "\nListe des contraintes :\n";} //on déclare une string vide sur laquelle on va concaténer les noms des élèves
       '{' finInstruction? (contraintes {$code += $contraintes.code;} finInstruction)* finInstruction? '}'
-      { System.out.println(classe.evaluate(constraintBuilder.getConstraints()));} //une fois que toutes les contraintes ont été ajoutées on lance l'algo sur les contraintes
+      {
+	/* System.out.println(classe.evaluate(constraintBuilder.getConstraints()));*/
+      } //une fois que toutes les contraintes ont été ajoutées on lance l'algo sur les contraintes
     ;
 
 contraintes returns [ String code ]
@@ -134,6 +136,10 @@ contraintes returns [ String code ]
       {
         $code = fonctionEvalContrainteDouble($eleve1.text, $eleve2.text, $CONTRAINTES.text, constraintBuilder, classe) + "\n"; //on a préféré faire deux fonctions d'évaluation qu'une surcharge en fonction du nombre d'étudiants passés
       }
+    | .*?
+	{
+	$code = "Syntaxe de contrainte non reconnue !";
+	}
     ;
 
 finInstruction : ( NEWLINE | ';' )+ ;
