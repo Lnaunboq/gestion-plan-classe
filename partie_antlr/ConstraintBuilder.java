@@ -1,11 +1,9 @@
-package src;
-
 import java.util.*;
 
 public class ConstraintBuilder {
-	
+
 	private List<Constraint> constraints;
-		
+
 	public ConstraintBuilder() {
 		this.constraints = new LinkedList<Constraint>();
 	}
@@ -22,7 +20,7 @@ public class ConstraintBuilder {
 			return;
 		}
 	}
-	
+
 	public void build(String antlr, Student s, int rank) {
 		switch(antlr) {
 		case "au rang" :
@@ -32,8 +30,8 @@ public class ConstraintBuilder {
 			return;
 		}
 	}
-	
+
 	public List<Constraint> getConstraints() {
 		return this.constraints;
-	}	
+	}
 }

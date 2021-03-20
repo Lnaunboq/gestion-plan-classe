@@ -1,10 +1,8 @@
-package src;
-
 public class LineConstraint implements Constraint {
 
 	private Student student;
 	private int rank;
-	
+
 	public LineConstraint(Student student, int rank) {
 		this.student = student;
 		this.rank = rank - 1;

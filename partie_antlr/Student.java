@@ -1,11 +1,9 @@
-package src;
-
 public class Student {
 
 	private String identifiant;
 	private boolean rightHanded;
 	private boolean girl;
-	
+
 	public Student(String identifiant) {
 		this.identifiant = identifiant;
 	}

@@ -1,7 +1,5 @@
-package src;
-
 public interface Constraint {
-	
+
 	/**
 	 * check whether the constraint is satisfied by an instance
 	 * @param instance an instance of
