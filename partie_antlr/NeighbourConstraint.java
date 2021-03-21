@@ -23,13 +23,15 @@ public class NeighbourConstraint implements Constraint {
 		int[] positions = new int[4];
 		for(int i = 0; i < instance.length; i++) {
 			for(int j = 0; j < instance[i].length; j++) {
-				if(instance[i][j].equals(s1)) {
-					positions[0] = i;
-					positions[1] = j;
-				}
-				if(instance[i][j].equals(s2)) {
-					positions[2] = i;
-					positions[3] = j;
+				if(instance[i][j] != null) {
+					if(instance[i][j].equals(s1)) {
+						positions[0] = i;
+						positions[1] = j;
+					}
+					if(instance[i][j].equals(s2)) {
+						positions[2] = i;
+						positions[3] = j;
+					}
 				}
 			}
 		}
