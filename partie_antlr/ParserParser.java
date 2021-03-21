@@ -898,7 +898,7 @@ public class ParserParser extends Parser {
 			setState(156);
 			match(T__4);
 
-				/* System.out.println(classe.evaluate(constraintBuilder.getConstraints()));*/
+				 System.out.println(classe.evaluate(constraintBuilder.getConstraints()));
 			      
 			}
 		}

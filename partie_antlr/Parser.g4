@@ -123,7 +123,7 @@ blocContraintes returns [ String code ]
     : {$code = "\nListe des contraintes :\n";} //on déclare une string vide sur laquelle on va concaténer les noms des élèves
       '{' finInstruction? (contraintes {$code += $contraintes.code;} finInstruction)* finInstruction? '}'
       {
-	/* System.out.println(classe.evaluate(constraintBuilder.getConstraints()));*/
+	 System.out.println(classe.evaluate(constraintBuilder.getConstraints()));
       } //une fois que toutes les contraintes ont été ajoutées on lance l'algo sur les contraintes
     ;
 
