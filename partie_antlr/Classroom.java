@@ -1,7 +1,8 @@
 import java.util.*;
 
-import src.Constraint;
-import src.Student;
+import partie_antlr.Constraint;
+import partie_antlr.Student;
+
 
 public class Classroom {
 
@@ -101,7 +102,12 @@ public class Classroom {
 	}
 	
 	@Override
-	public String toString() {
-		
+	public String toString(List<Constraint> constraints) {
+		String ret ="";
+		for(Student stud : this.students) {
+			ret+= stud.getIdentifiant() + ", " + stud.getRangee() + ", " + stud.getPlace() +" \n";
+		}
+		ret+= this.evaluate(constraints);
+		return ret;
 	}
 }
