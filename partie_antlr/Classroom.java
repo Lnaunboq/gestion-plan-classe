@@ -1,5 +1,8 @@
 import java.util.*;
 
+import src.Constraint;
+import src.Student;
+
 public class Classroom {
 
 	private List<Student> students;
@@ -28,9 +31,6 @@ public class Classroom {
 		this.students.add(new Student(identifiant));
 	}
 
-	public void setStudentPosition(Student s, int line, int place) {
-		this.classPlan[line - 1][place - 1] = s;
-	}
 
 	public float evaluate(List<Constraint> constraints) {
 		if(constraints.isEmpty())
@@ -55,4 +55,53 @@ public class Classroom {
 		return this.classPlan.length;
 	}
 
+	public void swap(Student a, Student b) {
+		int rangeeB = b.getRangee();
+		int placeB = b.getPlace();
+		this.classPlan[a.getRangee()][a.getPlace()] = b;
+		b.setBoth(a.getRangee(), a.getPlace());
+		this.classPlan[rangeeB][placeB] = a;
+		a.setBoth(rangeeB, placeB);
+	}
+	
+	public void init() {
+		int a = 0;
+		for(int rangee = 0; rangee<this.classPlan.length; rangee++) {
+			for(int place = 0; place < this.classPlan[rangee].length; place++) {
+				this.classPlan[rangee][place] = this.students.get(a);
+				this.students.get(a).setBoth(rangee, place);
+				a++;
+				if(a >= this.students.size()) {
+					return;
+				}
+			}
+		}
+		return;
+	}
+	
+	public void algo(List<Constraint> constraints) {
+		this.init();
+		Student a,b;
+		Random alea = new Random();
+		int iteration = 0;
+		int size = constraints.size();
+		float score = 0;
+		while(iteration < 50 || iteration < size*size ) {
+			score = this.evaluate(constraints);
+			if( score == 1.0) {break ; }
+			a = this.students.get(alea.nextInt(this.students.size()));
+			b = this.students.get(alea.nextInt(this.students.size()));
+			this.swap(a,b);
+			if(score > this.evaluate(constraints)) {
+				this.swap(a, b);
+			}
+			iteration++;
+		}
+		return;
+	}
+	
+	@Override
+	public String toString() {
+		
+	}
 }

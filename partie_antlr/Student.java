@@ -1,11 +1,14 @@
 public class Student {
 
 	private String identifiant;
+	private int rangee, place;
 	private boolean rightHanded;
 	private boolean girl;
-
+	
 	public Student(String identifiant) {
 		this.identifiant = identifiant;
+		this.rangee = 0;
+		this.place = 0;
 	}
 
 	public boolean isRightHanded() {
@@ -30,6 +33,27 @@ public class Student {
 
 	public void setIdentifiant(String identifiant) {
 		this.identifiant = identifiant;
+	}
+	
+	public int getRangee() {
+		return this.rangee;
+	}
+	
+	public void setRangee(int nRangee) {
+		this.rangee = nRangee;
+	}
+	
+	public int getPlace() {
+		return this.place;
+	}
+	
+	public void setPlace(int nPlace) {
+		this.place = nPlace;
+	}
+	
+	public void setBoth(int nRangee, int nPlace) {
+		this.rangee = nRangee;
+		this.place = nPlace;
 	}
 
 	@Override
