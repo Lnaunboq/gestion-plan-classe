@@ -89,25 +89,49 @@ public class Classroom {
 		float score = 0;
 		while(iteration < 50 || iteration < size*size ) {
 			score = this.evaluate(constraints);
-			if( score == 1.0) {break ; }
+			if( score == 1.0) { break; }
+			
+			//élève aléatoire parmis les élèves
 			a = this.students.get(alea.nextInt(this.students.size()));
-			b = this.students.get(alea.nextInt(this.students.size()));
-			this.swap(a,b);
+			int rangeeA = a.getRangee();
+			int placeA = a.getPlace();
+			
+			//place aléatoire sur le plan de classe sur laquelle on va deplacer a
+			int rangeeB = alea.nextInt(this.classPlan.length);
+			int placeB = alea.nextInt(this.classPlan[rangeeB].length);
+			b = this.classPlan[rangeeB][placeB];
+			
+			//echange de place entre a et b
+			this.classPlan[rangeeA][placeA] = b;
+			this.classPlan[rangeeB][placeB] = a;
+			a.setBoth(rangeeB, placeB);
+			if(b != null)
+				b.setBoth(rangeeA, placeA);
+			
+			//evaluation du score du nouveau plan de classe
 			if(score > this.evaluate(constraints)) {
-				this.swap(a, b);
+				this.classPlan[rangeeA][placeA] = a;
+				this.classPlan[rangeeB][placeB] = b;
+				a.setBoth(rangeeA, placeA);
+				if(b != null)
+					b.setBoth(rangeeB, placeB);
 			}
 			iteration++;
 		}
 		return;
 	}
 	
-	@Override
-	public String toString(List<Constraint> constraints) {
+	public String toString() {
 		String ret ="";
-		for(Student stud : this.students) {
+		/*for(Student stud : this.students) {
 			ret+= stud.getIdentifiant() + ", " + stud.getRangee() + ", " + stud.getPlace() +" \n";
+		}*/
+		for(int rangee = 0; rangee < this.classPlan.length; rangee++) {
+			for(int place = 0; place < this.classPlan[rangee].length; place++) {
+				ret = this.classPlan[rangee][place] != null ? ret + this.classPlan[rangee][place].getIdentifiant() + " " : ret + "Personne ";
+			}
+			ret += "\n";
 		}
-		ret+= this.evaluate(constraints);
 		return ret;
 	}
 }
