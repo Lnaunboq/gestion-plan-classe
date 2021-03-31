@@ -5,16 +5,22 @@ public class Classroom {
 	private List<Student> students;
 	private Student[][] classPlan;
 	private float score;
+	private int nbPlaces = 0;
 
 	public Classroom(int lines) {
 		this.students = new LinkedList<Student>();
 		this.classPlan = new Student[lines][];
+		for(int i = 0; i < this.classPlan.length; i++) {
+			this.classPlan[i] = new Student[1];
+			this.nbPlaces++;
+		}
 	}
 
 	public void setNumberOfPlace(int line, int places) {
 		if(line > this.classPlan.length || line < 1)
 			return;
 		this.classPlan[line-1] = new Student[places];
+		this.nbPlaces += places - 1;
 	}
 
 	public Student getStudent(String identifiant) {
@@ -26,7 +32,8 @@ public class Classroom {
 	}
 
 	public void addStudent(String identifiant) {
-		this.students.add(new Student(identifiant));
+		if(this.students.size() <= this.nbPlaces)
+			this.students.add(new Student(identifiant));
 	}
 
 
@@ -69,11 +76,6 @@ public class Classroom {
 	}
 
 	public void algo(List<Constraint> constraints) {
-		for(int i = 0; i < this.classPlan.length; i++) {
-			if(this.classPlan[i] == null) {
-				this.classPlan[i] = new Student[1];
-			}
-		}
 		this.init();
 		Student a,b;
 		Random alea = new Random();
