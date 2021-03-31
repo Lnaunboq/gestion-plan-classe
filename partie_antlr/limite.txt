@@ -1,0 +1,82 @@
+DISPOSITION {
+10 rangees
+Rangee 1 30
+Rangee 2 35
+Rangee 3 40
+Rangee 4 45
+Rangee 5 50
+Rangee 6 55
+}
+
+CLASSE {
+BOITEAU-Antoine
+Thibault
+GRASSI-Marion
+Matteo
+Ezaeaea
+Ezaeae
+Frarara
+FZfezfz
+FZEFZ
+REX
+Trsex
+Yzeaez
+Vgzetz
+Gezrzd
+fezfz
+FEFZfaa
+Uwu
+Owo
+Cheh
+Sucette
+Herbe
+Chat
+Haribo
+Alpha
+Beta
+Charlie
+Delta
+Tango
+Foxtrot
+Guillaume
+Henry
+Issou
+Julie
+Khaled-DJ
+Laurie
+Maude
+Nourah
+Ophelie
+Patrick-Lattendu
+Quentin
+Ra
+Stupeflip
+Tortoise
+Ulysse
+Victoire
+Wallis-Futuna
+Xerses
+Yohann
+Zinedine-Zidane
+}
+
+CONTRAINTES {
+BOITEAU-Antoine D
+Thibault L Matteo
+GRASSI-Marion F
+Zinedine-Zidane Pas maintenant pas aujourdhui pas apres tout ce que tu as fais
+Maude F
+Foxtrot P Charlie
+Tango D
+Alpha L Beta
+Julie F
+Laurie F
+Tortoise F
+Ra D
+Ulysse L Nourah
+Chat P Herbe
+Herbe P Chat
+Chat P Herbe
+Guilllaume L Henry
+}
+
