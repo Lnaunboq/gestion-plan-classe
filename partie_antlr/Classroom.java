@@ -1,13 +1,10 @@
 import java.util.*;
 
-import partie_antlr.Constraint;
-import partie_antlr.Student;
-
-
 public class Classroom {
 
 	private List<Student> students;
 	private Student[][] classPlan;
+	private float score;
 
 	public Classroom(int lines) {
 		this.students = new LinkedList<Student>();
@@ -87,7 +84,7 @@ public class Classroom {
 		int iteration = 0;
 		int size = constraints.size();
 		float score = 0;
-		while(iteration < 50 || iteration < size*size ) {
+		while(iteration < 1000 || iteration < size*size ) {
 			score = this.evaluate(constraints);
 			if( score == 1.0) { break; }
 
@@ -118,20 +115,23 @@ public class Classroom {
 			}
 			iteration++;
 		}
+		this.score = this.evaluate(constraints);
 		return;
 	}
 
 	public String toString() {
-		String ret ="";
+		String ret ="Résultats du l'algorithme :\n\n-Plan de classe\n\n";
 		/*for(Student stud : this.students) {
 			ret+= stud.getIdentifiant() + ", " + stud.getRangee() + ", " + stud.getPlace() +" \n";
 		}*/
 		for(int rangee = 0; rangee < this.classPlan.length; rangee++) {
+			ret += "Rangée " + (rangee+1) + " : "; 
 			for(int place = 0; place < this.classPlan[rangee].length; place++) {
 				ret = this.classPlan[rangee][place] != null ? ret + this.classPlan[rangee][place].getIdentifiant() + " " : ret + "Personne ";
 			}
 			ret += "\n";
 		}
+		ret += "\n\n-Taux de contraintes satisfaites : " + (this.score*100) + "%\n\n";
 		return ret;
 	}
 }

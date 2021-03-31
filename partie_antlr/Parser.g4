@@ -8,7 +8,7 @@ grammar Parser;
             constraintBuilder.build("au rang", classe.getStudent(eleve), 1); //on positionne la contrainte sur l'eleve au premier rang
             return eleve + " va devant ";
         } else if ( constraint.equals("F") ){
-            constraintBuilder.build("au rang", classe.getStudent(eleve), classe.getRowNumber()-1); //on positionne la contrainte sur l'eleve au dernier rang
+            constraintBuilder.build("au rang", classe.getStudent(eleve), classe.getRowNumber()); //on positionne la contrainte sur l'eleve au dernier rang
             return eleve + " va au fond.";
         } else if ( constraint.equals("L") ){
             return " loin de ";
@@ -52,7 +52,9 @@ start:parsing EOF;
 parsing returns [String code]
 @init{ $code = new String(); }   // On initialise code, pour ensuite l'utiliser comme accumulateur
 @after{ System.out.println($code); } // On affiche le résultat du parsing (juste pour vérifier)
-    :   (declDisposition { $code += $declDisposition.code; })*
+    :    {$code += "\n---interprétation par la grammaire---\n";}
+
+	 (declDisposition { $code += $declDisposition.code; })*
 
         NEWLINE*
 
@@ -123,7 +125,8 @@ blocContraintes returns [ String code ]
     : {$code = "\nListe des contraintes :\n";} //on déclare une string vide sur laquelle on va concaténer les noms des élèves
       '{' finInstruction? (contraintes {$code += $contraintes.code;} finInstruction)* finInstruction? '}'
       {
-	 System.out.println(classe.evaluate(constraintBuilder.getConstraints()));
+	 classe.algo(constraintBuilder.getConstraints());
+	 System.out.println(classe);
       } //une fois que toutes les contraintes ont été ajoutées on lance l'algo sur les contraintes
     ;
 

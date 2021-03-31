@@ -1,9 +1,10 @@
 DISPOSITION {
-4 rangees
+5 rangees
 Rangee 1 4
 Rangee 2 4
 Rangee 3 4
 Rangee 4 3
+Rangee 5 2
 }
 
 CLASSE {
