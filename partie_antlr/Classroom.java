@@ -9,7 +9,6 @@ public class Classroom {
 	public Classroom(int lines) {
 		this.students = new LinkedList<Student>();
 		this.classPlan = new Student[lines][];
-		System.out.println(this.classPlan.length);
 	}
 
 	public void setNumberOfPlace(int line, int places) {
@@ -70,6 +69,11 @@ public class Classroom {
 	}
 
 	public void algo(List<Constraint> constraints) {
+		for(int i = 0; i < this.classPlan.length; i++) {
+			if(this.classPlan[i] == null) {
+				this.classPlan[i] = new Student[1];
+			}
+		}
 		this.init();
 		Student a,b;
 		Random alea = new Random();
