@@ -1,0 +1,31 @@
+DISPOSITION {
+3 rangees
+Rangee 1 3
+Rangee 2 3
+Rangee 3 3
+}
+
+CLASSE {
+BOITEAU-Antoine
+Thibault
+GRASSI-Marion
+Matteo
+Alpha
+Beta
+Gamma
+Delta
+Epsilon
+Zeta
+}
+
+CONTRAINTES {
+BOITEAU-Antoine D
+Thibault L Matteo
+GRASSI-Marion F
+Alpha D
+Beta D
+Zeta D
+Beta L Zeta
+Alpha L Zeta
+}
+
