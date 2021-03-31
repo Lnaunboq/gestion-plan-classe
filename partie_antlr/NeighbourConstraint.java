@@ -12,29 +12,9 @@ public class NeighbourConstraint implements Constraint {
 
 	@Override
 	public boolean isSatisfiedBy(Student[][] instance) {
-		int[] positions = this.getPosition(instance);
 		if(this.neighbour)
-			return Math.abs(positions[0] - positions[2]) == 0 && Math.abs(positions[1] - positions[3]) == 1;
+			return Math.abs(this.s1.getRangee() - this.s2.getRangee()) == 0 && Math.abs(this.s1.getPlace() - this.s2.getPlace()) == 1;
 		else
-			return Math.abs(positions[0] - positions[2]) > 1 || Math.abs(positions[1] - positions[3]) > 1;
-	}
-
-	private int[] getPosition(Student[][] instance) {
-		int[] positions = new int[4];
-		for(int i = 0; i < instance.length; i++) {
-			for(int j = 0; j < instance[i].length; j++) {
-				if(instance[i][j] != null) {
-					if(instance[i][j].equals(s1)) {
-						positions[0] = i;
-						positions[1] = j;
-					}
-					if(instance[i][j].equals(s2)) {
-						positions[2] = i;
-						positions[3] = j;
-					}
-				}
-			}
-		}
-		return positions;
+			return Math.abs(this.s1.getRangee() - this.s2.getRangee()) > 1 || Math.abs(this.s1.getPlace() - this.s2.getPlace()) > 1;
 	}
 }

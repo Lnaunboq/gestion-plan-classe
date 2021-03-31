@@ -52,16 +52,7 @@ public class Classroom {
 	public int getRowNumber() {
 		return this.classPlan.length;
 	}
-
-	public void swap(Student a, Student b) {
-		int rangeeB = b.getRangee();
-		int placeB = b.getPlace();
-		this.classPlan[a.getRangee()][a.getPlace()] = b;
-		b.setBoth(a.getRangee(), a.getPlace());
-		this.classPlan[rangeeB][placeB] = a;
-		a.setBoth(rangeeB, placeB);
-	}
-
+	
 	public void init() {
 		int a = 0;
 		for(int rangee = 0; rangee<this.classPlan.length; rangee++) {
