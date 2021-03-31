@@ -9,6 +9,7 @@ public class Classroom {
 	public Classroom(int lines) {
 		this.students = new LinkedList<Student>();
 		this.classPlan = new Student[lines][];
+		System.out.println(this.classPlan.length);
 	}
 
 	public void setNumberOfPlace(int line, int places) {

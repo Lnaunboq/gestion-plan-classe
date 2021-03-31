@@ -38,7 +38,7 @@ grammar Parser;
         }
       }
       else {
-        return "L élève " + eleve1 + " ou " + eleve2 + "n a pas été trouvé dans la classe.";
+        return "L élève " + eleve1 + " ou " + eleve2 + " n\'a pas été trouvé dans la classe.";
       }
     }
 
@@ -141,7 +141,7 @@ contraintes returns [ String code ]
       }
     | .*?
 	{
-	$code = "Syntaxe de contrainte non reconnue !";
+	$code = "Syntaxe de contrainte non reconnue !\n";
 	}
     ;
 

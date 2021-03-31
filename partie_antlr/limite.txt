@@ -1,5 +1,5 @@
 DISPOSITION {
-10 rangees
+6 rangees
 Rangee 1 30
 Rangee 2 35
 Rangee 3 40
