@@ -10,10 +10,6 @@ public class LineConstraint implements Constraint {
 
 	@Override
 	public boolean isSatisfiedBy(Student[][] instance) {
-		for(int j = 0; j < instance[this.row].length; j++) {
-			if(instance[this.row][j] != null && instance[this.row][j].equals(this.student))
-				return true;
-		}
-		return false;
+		return this.student.getRangee() == this.row;
 	}
 }
